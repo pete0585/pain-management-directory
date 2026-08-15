@@ -1,4 +1,4 @@
-# PainManagementFinder.com
+# FindPainManagement.com
 
 The first neutral, patient-facing directory for board-certified pain management physicians and clinics. 15,000-20,000 physicians seeded from NPPES public data. Monetized at $149/yr (Verified) and $299/yr (Featured).
 
@@ -9,7 +9,7 @@ The first neutral, patient-facing directory for board-certified pain management 
 - Supabase (PostgreSQL + Auth) — `fbuqrnzofktepkzyfmhy` project, `pm_listings/claims/payments/leads` tables
 - Stripe (Verified $149/yr, Featured $299/yr)
 - Vercel deployment
-- Resend for email (verification + outreach via `mail.painmanagementfinder.com`)
+- Resend for email (verification + outreach via `mail.findpainmanagement.com`)
 
 ## Local Development
 
@@ -34,9 +34,9 @@ Open http://localhost:3000
 | `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret |
 | `STRIPE_VERIFIED_PRICE_ID` | Stripe price ID for Verified ($149/yr) |
 | `STRIPE_FEATURED_PRICE_ID` | Stripe price ID for Featured ($299/yr) |
-| `NEXT_PUBLIC_SITE_URL` | Site URL (https://www.painmanagementfinder.com) |
+| `NEXT_PUBLIC_SITE_URL` | Site URL (https://www.findpainmanagement.com) |
 | `RESEND_API_KEY` | Resend API key |
-| `RESEND_FROM_EMAIL` | Sending email (no-reply@mail.painmanagementfinder.com) |
+| `RESEND_FROM_EMAIL` | Sending email (no-reply@mail.findpainmanagement.com) |
 
 ## Supabase Setup
 
@@ -67,7 +67,7 @@ Target taxonomy codes: `208VP0000X`, `208VP0014X`, `207LP2900X`, `2081P2900X`, `
 1. Push to GitHub repo (`pete0585/pain-management-directory`)
 2. Vercel auto-deploys on push to main
 3. All env vars are set via bootstrap agent — no manual configuration needed
-4. Custom domain: `painmanagementfinder.com` + `www.painmanagementfinder.com`
+4. Custom domain: `findpainmanagement.com` + `www.findpainmanagement.com`
 
 ## Key Pages
 
@@ -97,7 +97,7 @@ Target taxonomy codes: `208VP0000X`, `208VP0014X`, `207LP2900X`, `2081P2900X`, `
 
 ## Resend Webhook
 
-Register at: `https://www.painmanagementfinder.com/api/inbound-email` (MUST use www — Vercel redirects non-www with 307)
+Register at: `https://www.findpainmanagement.com/api/inbound-email` (MUST use www — Vercel redirects non-www with 307)
 
 ## Outreach Configuration
 
@@ -106,8 +106,8 @@ After launch, add to `agents/outreach/config.json`:
 {
   "slug": "pain-management",
   "supabase_table": "pm_listings",
-  "sending_domain": "mail.painmanagementfinder.com",
-  "site_url": "https://www.painmanagementfinder.com",
+  "sending_domain": "mail.findpainmanagement.com",
+  "site_url": "https://www.findpainmanagement.com",
   "enabled": false,
   "daily_cap": 0
 }
