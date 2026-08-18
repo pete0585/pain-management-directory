@@ -9,7 +9,7 @@ import { SPECIALTIES, CONDITIONS, PROCEDURES } from '@/lib/types'
 export const metadata: Metadata = {
   title: 'PainManagementFinder.com — Find a Board-Certified Pain Specialist Near You',
   description:
-    'Find board-certified pain management doctors and clinics near you. Filter by VA Community Care, specialty, conditions treated, and procedures offered. 15,000+ physicians nationwide.',
+    'Find board-certified pain management doctors near you. Filter by VA Community Care, specialty, and conditions treated. 15,000+ physicians nationwide.',
 }
 
 export default async function HomePage() {
