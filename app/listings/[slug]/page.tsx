@@ -4,6 +4,8 @@ import { getListingBySlug, getAllSlugs } from '@/lib/data'
 import ListingDetail from '@/components/ListingDetail'
 import { doctorName } from '@/lib/utils'
 
+export const dynamicParams = true
+
 interface PageProps {
   params: Promise<{ slug: string }>
 }
