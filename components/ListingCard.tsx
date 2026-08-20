@@ -12,7 +12,7 @@ export default function ListingCard({ listing, featured }: Props) {
   const name = doctorName(listing)
 
   return (
-    <Link href={`/doctor/${listing.slug}`} className="card p-5 flex flex-col gap-3 group">
+    <Link href={`/listings/${listing.slug}`} className="card p-5 flex flex-col gap-3 group">
       {/* Header */}
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0 h-12 w-12 rounded-xl bg-navy-50 flex items-center justify-center overflow-hidden">
