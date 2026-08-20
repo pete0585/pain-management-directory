@@ -1,7 +1,7 @@
 import { createServiceClient, createStaticClient } from '@/lib/supabase/server'
 import type { PMListing } from '@/lib/types'
 
-const TABLE = 'pm_listings'
+const TABLE = 'pain_management_listings'
 
 export async function getFeaturedListings(limit = 6): Promise<PMListing[]> {
   const supabase = await createServiceClient()
