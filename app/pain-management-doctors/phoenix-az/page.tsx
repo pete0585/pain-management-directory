@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server"
 export const metadata: Metadata = {
   title: "Best Pain Management Doctor in Phoenix, AZ | Pain Management Doctor Directory",
   description: "Find pain management doctor in Phoenix, Arizona. 32+ listed. Filter by city and compare providers.",
+  alternates: { canonical: "/pain-management-doctors/phoenix-az" },
 }
 
 async function getListings() {

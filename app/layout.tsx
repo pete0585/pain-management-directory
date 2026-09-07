@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   },
   description:
     'Find board-certified pain management doctors and clinics near you. Filter by specialty, condition, procedure, and VA Community Care acceptance. Free to search — 15,000+ physicians nationwide.',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.painmanagementfinder.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.findpainmanagement.com'),
   openGraph: {
     siteName: 'PainManagementFinder.com',
     type: 'website',

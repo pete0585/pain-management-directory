@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server"
 export const metadata: Metadata = {
   title: "Best Pain Management Doctor in Los Angeles, CA | Pain Management Doctor Directory",
   description: "Find pain management doctor in Los Angeles, California. 32+ listed. Filter by city and compare providers.",
+  alternates: { canonical: "/pain-management-doctors/los-angeles-ca" },
 }
 
 async function getListings() {

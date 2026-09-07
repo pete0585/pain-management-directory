@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server"
 export const metadata: Metadata = {
   title: "Best Pain Management Doctor in Philadelphia, PA | Pain Management Doctor Directory",
   description: "Find pain management doctor in Philadelphia, Pennsylvania. 34+ listed. Filter by city and compare providers.",
+  alternates: { canonical: "/pain-management-doctors/philadelphia-pa" },
 }
 
 async function getListings() {

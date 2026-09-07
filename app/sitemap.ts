@@ -1,8 +1,30 @@
+import { readdirSync } from 'fs'
+import path from 'path'
 import { MetadataRoute } from 'next'
 import { getAllSlugs, getTopCities } from '@/lib/data'
-import { CONDITIONS, PROCEDURES, SPECIALTIES } from '@/lib/types'
+import { CONDITIONS, PROCEDURES } from '@/lib/types'
+import { cityStateSlug } from '@/lib/utils'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.painmanagementfinder.com'
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.findpainmanagement.com').replace(
+  /\/$/,
+  ''
+)
+
+const CITY_PAGE_DIR = path.join(process.cwd(), 'app/pain-management-doctors')
+
+/** Static city folders under app/pain-management-doctors/{city}-{state}. */
+function discoverCityPageSlugs(): string[] {
+  try {
+    return readdirSync(CITY_PAGE_DIR, { withFileTypes: true })
+      .filter(
+        (entry) =>
+          entry.isDirectory() && !entry.name.startsWith('[') && !entry.name.startsWith('_')
+      )
+      .map((entry) => entry.name)
+  } catch {
+    return []
+  }
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [slugs, topCities] = await Promise.all([
@@ -17,8 +39,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  const cityUrls: MetadataRoute.Sitemap = topCities.map(({ city, state }) => ({
-    url: `${siteUrl}/pain-management-doctors/${city.toLowerCase().replace(/\s+/g, '-')}-${state.toLowerCase()}`,
+  const citySlugSet = new Set<string>([
+    ...discoverCityPageSlugs(),
+    ...topCities.map(({ city, state }) => cityStateSlug(city, state)),
+  ])
+
+  const cityUrls: MetadataRoute.Sitemap = [...citySlugSet].map((slug) => ({
+    url: `${siteUrl}/pain-management-doctors/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.9,
