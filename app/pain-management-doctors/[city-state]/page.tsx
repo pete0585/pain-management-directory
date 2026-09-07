@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `Pain Management Doctors in ${city}, ${stateName} — Board-Certified Specialists`,
     description: `Find board-certified pain management doctors in ${city}, ${stateName}. Filter by specialty, procedures offered, and VA Community Care acceptance. Free to search.`,
+    alternates: { canonical: `/pain-management-doctors/${cityState}` },
   }
 }
 

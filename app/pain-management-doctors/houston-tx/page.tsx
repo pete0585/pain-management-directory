@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server"
 export const metadata: Metadata = {
   title: "Best Pain Management Doctor in Houston, TX | Pain Management Doctor Directory",
   description: "Find pain management doctor in Houston, Texas. 35+ listed. Filter by city and compare providers.",
+  alternates: { canonical: "/pain-management-doctors/houston-tx" },
 }
 
 async function getListings() {
