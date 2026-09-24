@@ -50,7 +50,7 @@ export default async function ListingPage({ params }: PageProps) {
       <div className="mt-8 rounded-xl bg-gray-50 border border-gray-200 p-5">
         <p className="text-sm text-gray-600">
           <span className="font-semibold text-gray-800">Are you a provider listed here?</span>{' '}
-          <a href={`/claim/${listing.slug}`} className="underline hover:opacity-80">Claim your free listing</a>
+          <a href={`/claim/${listing!.slug}`} className="underline hover:opacity-80">Claim your free listing</a>
           {' '}to add your contact details and bio.{' '}
           <a href="https://studiozerohq.com" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80">Studio Zero</a>
           {' '}helps healthcare providers grow their practice with AI-powered marketing.
