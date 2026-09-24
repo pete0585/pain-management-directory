@@ -34,12 +34,22 @@ export default async function HomePage() {
           </div>
 
           <h1 className="text-4xl font-bold text-slate leading-tight sm:text-5xl tracking-tight text-balance">
-            Find a pain specialist{' '}
-            <span className="text-navy">who takes your pain seriously</span>
+            Find trusted pain management specialists near you
           </h1>
 
           <p className="mt-5 text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            80M Americans live with chronic pain. This is the directory they&apos;ve been waiting for — neutral, searchable by condition and procedure, with a dedicated filter for VA Community Care.
+            Browse pain management specialists by condition, procedure, and location — and connect directly. Free, always.
+          </p>
+          <p className="text-sm text-gray-500 mt-4">
+            Are you a pain management specialist?{' '}
+            <a
+              href="https://studiozerohq.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:opacity-80"
+            >
+              List your practice free →
+            </a>
           </p>
 
           <div className="mt-8 flex justify-center">
