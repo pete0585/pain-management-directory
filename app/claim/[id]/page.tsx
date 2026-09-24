@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import { CheckCircle, Loader2, AlertCircle } from 'lucide-react'
 
 interface PageProps {
@@ -12,7 +13,7 @@ export default function ClaimPage({ params }: PageProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [listingId, setListingId] = useState<string | null>(null)
-  const [step, setStep] = useState<'form' | 'sent' | 'verifying' | 'verified' | 'upgrade' | 'error'>('form')
+  const [step, setStep] = useState<'form' | 'sent' | 'verifying' | 'verified' | 'error'>('form')
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -48,7 +49,7 @@ export default function ClaimPage({ params }: PageProps) {
             setStep('error')
           })
       } else if (verified === 'true') {
-        setStep('upgrade')
+        setStep('verified')
       }
     })
   }, [params, searchParams])
@@ -83,7 +84,7 @@ export default function ClaimPage({ params }: PageProps) {
       await fetch('/api/claim/phone', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ listingId: params.id, phone }),
+        body: JSON.stringify({ listingId, phone }),
       })
       setPhoneSaved(true)
     } catch {
@@ -139,20 +140,6 @@ export default function ClaimPage({ params }: PageProps) {
     )
   }
 
-  if (step === 'upgrade') {
-    return (
-      <div className="mx-auto max-w-lg px-4 py-16 text-center">
-        <CheckCircle className="h-14 w-14 text-teal mx-auto mb-4" aria-hidden="true" />
-        <h1 className="text-2xl font-bold text-slate mb-2">Ready to Upgrade?</h1>
-        <p className="text-gray-500 mb-8">
-          Upgrade your listing to get full profile features and priority placement.
-        </p>
-        <div className="flex flex-col gap-4">
-        </div>
-        <p className="text-xs text-gray-400 mt-4">Secure payment via Stripe. Cancel anytime.</p>
-      </div>
-    )
-  }
 
   if (step === 'error') {
     return (
@@ -206,7 +193,7 @@ export default function ClaimPage({ params }: PageProps) {
         </form>
 
         <p className="text-xs text-gray-400 mt-4 text-center">
-          Free to claim. Upgrade after verification for priority placement.
+          Free to claim. No credit card required.
         </p>
       </div>
     </div>
