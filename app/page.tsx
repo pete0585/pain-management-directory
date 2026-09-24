@@ -5,6 +5,7 @@ import SearchBar from '@/components/SearchBar'
 import ListingCard from '@/components/ListingCard'
 import { getFeaturedListings, getTotalCount, getTopCities } from '@/lib/data'
 import { SPECIALTIES, CONDITIONS, PROCEDURES } from '@/lib/types'
+import NewsletterSignup from '@/components/NewsletterSignup'
 
 export const metadata: Metadata = {
   title: 'PainManagementFinder.com — Find a Board-Certified Pain Specialist Near You',
