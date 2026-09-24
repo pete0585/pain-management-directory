@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Suspense } from 'react'
 
 interface Props {
@@ -49,7 +50,7 @@ async function ConfirmContent({ searchParams }: Props) {
         <p className="text-gray-600 mb-6">
           You&apos;re now subscribed to <strong>{newsletterName}</strong>. Your first issue arrives next Thursday.
         </p>
-        <a href="/" className="text-sm text-gray-400 hover:text-gray-600 underline">Return to directory</a>
+        <Link href="/" className="text-sm text-gray-400 hover:text-gray-600 underline">Return to directory</Link>
       </div>
     )
   }
@@ -59,7 +60,7 @@ async function ConfirmContent({ searchParams }: Props) {
       <div className="text-4xl mb-4">✗</div>
       <h1 className="text-2xl font-bold mb-3">Confirmation failed</h1>
       <p className="text-gray-500 mb-6">{errorMsg}</p>
-      <a href="/" className="text-sm text-gray-400 hover:text-gray-600 underline">Return to directory</a>
+      <Link href="/" className="text-sm text-gray-400 hover:text-gray-600 underline">Return to directory</Link>
     </div>
   )
 }
