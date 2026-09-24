@@ -10,7 +10,6 @@ export async function getFeaturedListings(limit = 6): Promise<PMListing[]> {
     .select('*')
     .eq('is_active', true)
     .eq('is_approved', true)
-    .in('listing_tier', ['featured', 'verified'])
     .order('listing_tier_rank', { ascending: false })
     .limit(limit)
 
