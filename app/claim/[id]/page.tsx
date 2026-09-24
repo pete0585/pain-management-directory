@@ -17,6 +17,8 @@ export default function ClaimPage({ params }: PageProps) {
   const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const [listingSlug, setListingSlug] = useState('')
+  const [phone, setPhone] = useState('')
+  const [phoneSaved, setPhoneSaved] = useState(false)
 
   useEffect(() => {
     params.then(({ id }) => {
@@ -73,22 +75,6 @@ export default function ClaimPage({ params }: PageProps) {
     }
   }
 
-  async function handleUpgrade(tier: 'verified' | 'featured') {
-    if (!listingId) return
-    setLoading(true)
-    try {
-      const res = await fetch('/api/upgrade', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ listingId, tier }),
-      })
-      const data = await res.json()
-      if (data.url) window.location.href = data.url
-    } finally {
-      setLoading(false)
-    }
-  }
-
   async function savePhone(e: React.FormEvent) {
     e.preventDefault()
     if (!phone) return
@@ -122,7 +108,7 @@ export default function ClaimPage({ params }: PageProps) {
         <CheckCircle className="h-14 w-14 text-teal mx-auto mb-4" aria-hidden="true" />
         <h1 className="text-2xl font-bold text-slate mb-2">Listing Verified!</h1>
         <p className="text-gray-500 mb-8">
-          Your listing is now claimed. Upgrade to Verified or Featured to unlock full profile features.
+          Your listing is now claimed. Your contact details are now visible to everyone who finds you.
         </p>
         {/* Studio Zero upsell */}
         <div className="rounded-xl bg-blue-50 border border-blue-200 p-5 mb-6">
@@ -143,12 +129,6 @@ export default function ClaimPage({ params }: PageProps) {
         </div>
 
         <div className="flex flex-col gap-4">
-          <button onClick={() => handleUpgrade('featured')} disabled={loading} className="btn-primary py-4 text-base disabled:opacity-60">
-            Upgrade to Featured — $299/yr
-          </button>
-          <button onClick={() => handleUpgrade('verified')} disabled={loading} className="btn-secondary py-4 text-base disabled:opacity-60">
-            Upgrade to Verified — $149/yr
-          </button>
           {listingSlug && (
             <Link href={`/doctor/${listingSlug}`} className="text-sm text-gray-400 hover:text-navy">
               View my listing →
@@ -168,12 +148,6 @@ export default function ClaimPage({ params }: PageProps) {
           Upgrade your listing to get full profile features and priority placement.
         </p>
         <div className="flex flex-col gap-4">
-          <button onClick={() => handleUpgrade('featured')} disabled={loading} className="btn-primary py-4 text-base disabled:opacity-60">
-            {loading ? 'Loading...' : 'Upgrade to Featured — $299/yr'}
-          </button>
-          <button onClick={() => handleUpgrade('verified')} disabled={loading} className="btn-secondary py-4 text-base disabled:opacity-60">
-            Upgrade to Verified — $149/yr
-          </button>
         </div>
         <p className="text-xs text-gray-400 mt-4">Secure payment via Stripe. Cancel anytime.</p>
       </div>
