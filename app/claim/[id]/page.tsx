@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import Link from 'next/link'
 import { CheckCircle, Loader2, AlertCircle } from 'lucide-react'
 
 interface PageProps {
@@ -85,6 +84,24 @@ export default function ClaimPage({ params }: PageProps) {
       })
       const data = await res.json()
       if (data.url) window.location.href = data.url
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function savePhone(e: React.FormEvent) {
+    e.preventDefault()
+    if (!phone) return
+    setLoading(true)
+    try {
+      await fetch('/api/claim/phone', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ listingId: params.id, phone }),
+      })
+      setPhoneSaved(true)
+    } catch {
+      setPhoneSaved(true)
     } finally {
       setLoading(false)
     }
