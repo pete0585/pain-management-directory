@@ -60,7 +60,7 @@ export async function verifyClaim(req: NextRequest) {
     if (!auth.claim!.verified) {
       const now = new Date().toISOString()
       const patch: Record<string, unknown> = {}
-      for (const key of CLAIM_CONFIG.claimedFields) patch[key] = key === 'claimed' || key === 'is_claimed' ? true : now
+      for (const key of CLAIM_CONFIG.claimedFields) patch[key] = ['claimed', 'is_claimed'].includes(key) ? true : now
       const listing = await auth.db!.from(CLAIM_CONFIG.listings).update(patch).eq('id', auth.listingId!).select('id').maybeSingle()
       if (listing.error) return failure('Listing verification failed.', 503, listing.error.code)
       if (!listing.data) return failure('Listing no longer exists.', 404)
