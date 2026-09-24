@@ -268,9 +268,7 @@ export default async function HomePage() {
             <Link href="/submit" className="btn-primary px-8 py-4 text-base">
               List Your Practice Free
             </Link>
-            <Link href="/submit#pricing" className="btn-secondary px-8 py-4 text-base">
-              View Pricing
-            </Link>
+            
           </div>
         </div>
       </section>
