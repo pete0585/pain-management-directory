@@ -1,3 +1,4 @@
+import Link from 'next/link'
 'use client'
 
 import { useState, useEffect, Suspense } from 'react'
@@ -33,7 +34,7 @@ function UnsubscribeContent() {
       <div className="mx-auto max-w-lg px-4 py-20 text-center">
         <h1 className="text-2xl font-bold mb-3">Unsubscribed</h1>
         <p className="text-gray-500 mb-6">You&apos;ve been removed from <strong>The Pain Care Compass Letter</strong>. No more emails from us.</p>
-        <a href="/" className="text-sm text-gray-400 hover:text-gray-600 underline">Return to directory</a>
+        <Link href="/" className="text-sm text-gray-400 hover:text-gray-600 underline">Return to directory</Link>
       </div>
     )
   }
@@ -54,7 +55,7 @@ function UnsubscribeContent() {
         {status === 'loading' ? 'Processing...' : 'Yes, unsubscribe me'}
       </button>
       <div className="mt-4">
-        <a href="/" className="text-sm text-gray-400 hover:text-gray-600 underline">Cancel</a>
+        <Link href="/" className="text-sm text-gray-400 hover:text-gray-600 underline">Cancel</Link>
       </div>
     </div>
   )
