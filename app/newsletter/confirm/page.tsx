@@ -24,7 +24,7 @@ async function ConfirmContent({ searchParams }: Props) {
   let newsletterName = 'The Pain Care Compass Letter'
 
   try {
-    const res = await fetch('https://aidam.thestrategicveteran.com/api/newsletter/verify', {
+    const res = await fetch('https://aidam.studiozerohq.com/api/newsletter/verify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${serviceToken}` },
       body: JSON.stringify({ token }),
