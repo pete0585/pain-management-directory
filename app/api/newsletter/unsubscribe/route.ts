@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
   if (!token) return NextResponse.json({ error: 'Service unavailable' }, { status: 503 })
 
   try {
-    const res = await fetch('https://aidam.thestrategicveteran.com/api/newsletter/unsub', {
+    const res = await fetch('https://aidam.studiozerohq.com/api/newsletter/unsub', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ email, niche }),
