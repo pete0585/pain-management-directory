@@ -8,6 +8,7 @@ interface Props {
 
 export default function NewsletterSignup({ compact = false }: Props) {
   const [email, setEmail] = useState('')
+  const [website, setWebsite] = useState('')
   const [firstName, setFirstName] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'duplicate'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
@@ -21,7 +22,7 @@ export default function NewsletterSignup({ compact = false }: Props) {
       const res = await fetch('/api/newsletter/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), first_name: firstName.trim() || undefined }),
+        body: JSON.stringify({ website, email: email.trim(), first_name: firstName.trim() || undefined }),
       })
       const data = await res.json()
       if (res.status === 409) {
@@ -43,8 +44,8 @@ export default function NewsletterSignup({ compact = false }: Props) {
       <div className={compact ? 'py-2' : 'py-4 text-center'}>
         <p className={compact ? 'text-sm text-green-700' : 'text-green-700 font-medium'}>
           {status === 'duplicate'
-            ? 'Already subscribed! Check your inbox.'
-            : 'Check your inbox to confirm your subscription.'}
+            ? "You're already subscribed."
+            : "You're subscribed. No confirmation email needed."}
         </p>
       </div>
     )
@@ -53,6 +54,7 @@ export default function NewsletterSignup({ compact = false }: Props) {
   if (compact) {
     return (
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+        <div aria-hidden="true" style={{position:"absolute",left:"-10000px",width:1,height:1,overflow:"hidden"}}><label>Website<input name="website" type="text" tabIndex={-1} autoComplete="off" value={website} onChange={e => setWebsite(e.target.value)} /></label></div>
         <span className="text-xs font-semibold text-gray-300 whitespace-nowrap">The Pain Care Compass Letter</span>
         <input
           type="email"
@@ -79,6 +81,7 @@ export default function NewsletterSignup({ compact = false }: Props) {
       <h2 className="text-xl font-bold text-gray-900 mb-1">The Pain Care Compass Letter</h2>
       <p className="text-sm text-gray-500 mb-6">Weekly chronic pain management insights, delivered Thursday</p>
       <form onSubmit={handleSubmit} className="space-y-3">
+        <div aria-hidden="true" style={{position:"absolute",left:"-10000px",width:1,height:1,overflow:"hidden"}}><label>Website<input name="website" type="text" tabIndex={-1} autoComplete="off" value={website} onChange={e => setWebsite(e.target.value)} /></label></div>
         <div className="flex flex-col sm:flex-row gap-2">
           <input
             type="text"

@@ -8,7 +8,7 @@ export async function POST(req:Request){
   if(!body||typeof body!=='object'||Array.isArray(body))return NextResponse.json({error:'Invalid request'},{status:400})
   const token=process.env.NEWSLETTER_SUBMIT_TOKEN
   if(!token)return NextResponse.json({error:'Newsletter service not configured'},{status:503})
-  const input={email:body.email,first_name:body.first_name,niche:"pain-management"}
+  const input={website:body.website,company_website:body.company_website,email:body.email,first_name:body.first_name,niche:"pain-management"}
   const response=await fetch('https://aidam.studiozerohq.com/api/newsletter/subscribe',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token,'X-Newsletter-Client':(req.headers.get('x-forwarded-for')??'unknown').split(',')[0].trim()},body:JSON.stringify(input),cache:'no-store',signal:AbortSignal.timeout(30000)})
   return NextResponse.json(await response.json(),{status:response.status,headers:{'Cache-Control':'no-store'}})
  }catch{return NextResponse.json({error:'Newsletter request failed; please try again later'},{status:503})}
