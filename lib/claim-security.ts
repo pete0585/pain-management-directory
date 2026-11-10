@@ -1,3 +1,4 @@
+import { recordAction } from './action-events'
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { randomBytes } from 'node:crypto'
@@ -68,6 +69,8 @@ export async function verifyClaim(req: NextRequest) {
       if (saved.error) return failure('Claim verification failed.', 503, saved.error.code)
       if (!saved.data) return denied()
     }
+    // Analytics never changes or retries the verified ownership operation.
+    try { await recordAction('claim_completed', auth.listingId!, process.env.VERCEL_ENV !== 'production' || req.headers.get('x-directory-qa') === '1', auth.claim!.id) } catch { /* collection failure is reconciled separately */ }
     const response = NextResponse.json({ success: true }, { headers: { 'Cache-Control': 'no-store' } })
     response.cookies.set(COOKIE, auth.token!, { httpOnly: true, secure: true, sameSite: 'strict', path: '/', maxAge: Math.min(1800, Math.floor((auth.expiry! - Date.now()) / 1000)) })
     return response
@@ -104,6 +107,7 @@ export async function requestClaim(req: NextRequest) {
     const listing = await db.from(CLAIM_CONFIG.listings).select('id,email').eq('id', listingId).maybeSingle()
     if (listing.error) return failure('Listing lookup failed.', 503, listing.error.code)
     if (!listing.data || !normalize(listing.data.email) || normalize(listing.data.email) !== email) return denied()
+    try { await recordAction('claim_start', listingId, process.env.VERCEL_ENV !== 'production' || req.headers.get('x-directory-qa') === '1') } catch { /* no customer retry */ }
     const recent = await db.from(CLAIM_CONFIG.claims).select('id', { count: 'exact', head: true }).eq('listing_id', listingId).gte('created_at', new Date(Date.now() - 86400000).toISOString())
     if (recent.error) return failure('Claim request check failed.', 503, recent.error.code)
     if ((recent.count ?? 0) >= 5) return failure('Too many requests. Please try again tomorrow.', 429)

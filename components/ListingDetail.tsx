@@ -116,7 +116,7 @@ export default function ListingDetail({ listing }: Props) {
                 {formatPhone(listing.phone)}
               </a>)}
 
-            {listing.website_url && (<a href={listing.website_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 text-sm text-teal font-medium hover:text-teal-600 transition-colors">
+            {listing.website_url && (<a data-directory-action="website_click" href={listing.website_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 text-sm text-teal font-medium hover:text-teal-600 transition-colors">
                 <Globe className="h-4 w-4 flex-shrink-0" aria-hidden="true"/>
                 Visit Website
               </a>)}
