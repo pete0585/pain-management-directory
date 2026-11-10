@@ -44,7 +44,7 @@ export default function SubmitForm() {
                 body: JSON.stringify(data),
             });
             const json = await res.json();
-            if (!res.ok)
+            if (!res.ok || json.success !== true || json.status !== 'pending_review')
                 throw new Error(json.error ?? 'Submission failed');
             setSubmitted(true);
         }
@@ -57,7 +57,7 @@ export default function SubmitForm() {
         <p className="text-2xl mb-2">✅</p>
         <h2 className="text-xl font-bold text-slate mb-2">Listing Submitted!</h2>
         <p className="text-gray-500">
-          Your practice listing is under review. You&apos;ll receive a confirmation email within 24 hours once approved.
+          Your submission is saved for review. It is not public yet. No email has been sent.
         </p>
       </div>);
     }
